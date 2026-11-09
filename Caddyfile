@@ -1,0 +1,11 @@
+# Replace yourdomain.com with your domain (or use http://<vps-ip> to skip HTTPS)
+# With an IP only, keep it simple: http://PUBLIC_IP { reverse_proxy app:3000 }
+#
+# For HTTPS with a real domain:
+# yourdomain.com {
+#   reverse_proxy app:3000
+# }
+
+http://:80 {
+  reverse_proxy app:3000
+}
