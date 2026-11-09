@@ -12,7 +12,8 @@ const poolConfig = {
   dateStrings: true,
   connectTimeout: 10000,
 };
-if (process.env.DB_SSL === 'true') poolConfig.ssl = { rejectUnauthorized: false };
+const useSSL = ['true', '1', 'yes'].includes(String(process.env.DB_SSL).toLowerCase()) || String(poolConfig.host).includes('tidbcloud.com');
+if (useSSL) poolConfig.ssl = { rejectUnauthorized: false };
 const pool = mysql.createPool(poolConfig);
 async function query(sql, params = []) {
   const [rows] = await pool.execute(sql, params);
